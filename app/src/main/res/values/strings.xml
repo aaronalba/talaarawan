@@ -9,4 +9,7 @@
     <string name="re_enter_pin">Re-enter pin</string>
     <string name="enter_name">Enter name</string>
     <string name="register">Register</string>
+    <string name="entries">Entries</string>
+    <string name="no_entries_added_yet">No entries added yet</string>
+    <string name="add_entry">add entry</string>
 </resources>
