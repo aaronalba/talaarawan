@@ -5,4 +5,8 @@
     <string name="enter_pin">Enter pin</string>
     <string name="login">Login</string>
     <string name="user">user</string>
+    <string name="sign_up">Sign up</string>
+    <string name="re_enter_pin">Re-enter pin</string>
+    <string name="enter_name">Enter name</string>
+    <string name="register">Register</string>
 </resources>
