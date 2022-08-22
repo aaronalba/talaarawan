@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/Talaarawan/app/src/main/res/drawable/ic_diary.xml" value="0.199" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/Talaarawan/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/Talaarawan/app/src/main/res/layout/fragment_login.xml" value="0.21" />
       </map>
     </option>
   </component>

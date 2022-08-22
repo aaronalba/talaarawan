@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Talaarawan</string>
+    <string name="welcome_back">Welcome back</string>
+    <string name="pin">Pin</string>
+    <string name="enter_pin">Enter pin</string>
+    <string name="login">Login</string>
+    <string name="user">user</string>
 </resources>
