@@ -9,11 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.aaron.talaarawan.JournalViewModel
-import com.aaron.talaarawan.JournalViewModelFactory
 import com.aaron.talaarawan.R
-import com.aaron.talaarawan.data.Entry
-import com.aaron.talaarawan.data.User
 import com.aaron.talaarawan.databinding.FragmentLoginBinding
 import com.aaron.talaarawan.viewmodels.LoginViewModel
 import com.aaron.talaarawan.viewmodels.LoginViewModelFactory

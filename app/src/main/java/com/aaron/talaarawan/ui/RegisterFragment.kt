@@ -11,10 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.aaron.talaarawan.R
-import com.aaron.talaarawan.RegisterViewModel
-import com.aaron.talaarawan.RegisterViewModelFactory
+import com.aaron.talaarawan.viewmodels.RegisterViewModel
+import com.aaron.talaarawan.viewmodels.RegisterViewModelFactory
 import com.aaron.talaarawan.databinding.FragmentRegisterBinding
-import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
 /**

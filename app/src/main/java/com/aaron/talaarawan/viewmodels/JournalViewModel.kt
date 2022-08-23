@@ -1,10 +1,9 @@
-package com.aaron.talaarawan
+package com.aaron.talaarawan.viewmodels
 
 import androidx.lifecycle.*
 import com.aaron.talaarawan.data.EntryDao
 import com.aaron.talaarawan.data.User
 import com.aaron.talaarawan.data.UserDao
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 /**
