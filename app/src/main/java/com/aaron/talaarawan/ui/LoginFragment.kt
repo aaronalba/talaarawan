@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.aaron.talaarawan.JournalViewModel
 import com.aaron.talaarawan.JournalViewModelFactory
+import com.aaron.talaarawan.R
 import com.aaron.talaarawan.data.Entry
 import com.aaron.talaarawan.data.User
 import com.aaron.talaarawan.databinding.FragmentLoginBinding
@@ -55,12 +56,22 @@ class LoginFragment : Fragment() {
                 val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
                 findNavController().navigate(action)
             } else {
-                // hide the loading indicator and show login field
+                // a user is detected, Note: currently supports only one user
                 binding.apply {
+                    // hide the loading indicator
                     progressBar.visibility = View.GONE
-                    username.visibility = View.VISIBLE
+
+                    // show login field
                     pinInputLayout.visibility = View.VISIBLE
                     loginBtn.visibility = View.VISIBLE
+
+                    // show and set the username text view
+                    val name: String = list[0].userFullName.split(" ").first()
+                    username.visibility = View.VISIBLE
+                    username.text = name
+
+                    // greet user
+                    header.text = getString(R.string.welcome_back)
                 }
             }
         }
