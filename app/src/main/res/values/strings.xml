@@ -12,4 +12,6 @@
     <string name="entries">Entries</string>
     <string name="no_entries_added_yet">No entries added yet</string>
     <string name="add_entry">add entry</string>
+    <string name="write_here">Write here</string>
+    <string name="add_title">Add title</string>
 </resources>

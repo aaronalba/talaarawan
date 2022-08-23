@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/entryListFragment">
+    app:startDestination="@id/detailFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -20,4 +20,9 @@
         android:name="com.aaron.talaarawan.ui.EntryListFragment"
         android:label="EntryListFragment"
         tools:layout="@layout/fragment_entry_list"/>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.aaron.talaarawan.ui.EditFragment"
+        android:label="DetailFragment"
+        tools:layout="@layout/fragment_edit"/>
 </navigation>
