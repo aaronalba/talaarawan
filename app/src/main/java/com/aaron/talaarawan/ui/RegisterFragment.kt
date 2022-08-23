@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.aaron.talaarawan.R
 import com.aaron.talaarawan.RegisterViewModel
 import com.aaron.talaarawan.RegisterViewModelFactory
@@ -82,6 +83,8 @@ class RegisterFragment : Fragment() {
             if (registerViewModel.isPinValid(pin, pin2)) {
                 // save the user to the database
                 registerViewModel.registerUser(fullName, pin)
+                val action = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
+                findNavController().navigate(action)
             } else {
                 // pins do not match
                 binding.confirmInputLayout.error = getString(R.string.pins_do_not_match)

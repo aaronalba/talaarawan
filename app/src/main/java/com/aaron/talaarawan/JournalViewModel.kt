@@ -15,8 +15,6 @@ class JournalViewModel(
     private val entryDao: EntryDao
 ) : ViewModel() {
 
-    val allUsers: LiveData<List<User>> = userDao.getUsers().asLiveData()
-
     /**
      * Function to save a user to the database
      */

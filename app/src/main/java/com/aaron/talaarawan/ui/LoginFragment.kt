@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.aaron.talaarawan.JournalViewModel
 import com.aaron.talaarawan.JournalViewModelFactory
@@ -14,6 +15,7 @@ import com.aaron.talaarawan.data.User
 import com.aaron.talaarawan.databinding.FragmentLoginBinding
 import com.aaron.talaarawan.viewmodels.LoginViewModel
 import com.aaron.talaarawan.viewmodels.LoginViewModelFactory
+import kotlinx.coroutines.launch
 
 /**
  * The login screen of the application.
@@ -44,11 +46,13 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.allUsers.observe(viewLifecycleOwner) {
-            if (it.isEmpty()) {
-                // not registered yet
-                val action =
-                    LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
+
+        // asynchronously load the list of users
+        viewLifecycleOwner.lifecycleScope.launch {
+            val list = viewModel.getUsers()
+            if (list.isEmpty()) {
+                // not yet registered, launch register fragment
+                val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
                 findNavController().navigate(action)
             } else {
                 // hide the loading indicator and show login field

@@ -3,14 +3,17 @@ package com.aaron.talaarawan.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.aaron.talaarawan.data.User
 import com.aaron.talaarawan.data.UserDao
+import kotlinx.coroutines.launch
 
 class LoginViewModel(private val userDao: UserDao) : ViewModel() {
 
-    // list of all users property from the database
-    val allUsers: LiveData<List<User>> = userDao.getUsers().asLiveData()
+    // list of all users from the database
+    suspend fun getUsers(): List<User> {
+        return userDao.getUsers()
+    }
 
     /**
      * Returns true if the entered pin is not blank

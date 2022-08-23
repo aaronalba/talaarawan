@@ -6,10 +6,10 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface UserDao {
     @Query("SELECT * FROM user")
-    fun getUsers(): Flow<List<User>>
+    suspend fun getUsers(): List<User>
 
     @Query("SELECT * FROM user WHERE id = :id")
-    fun getUser(id: Int): Flow<User>
+    suspend fun getUser(id: Int): User
 
     @Insert
     suspend fun insert(user: User)
