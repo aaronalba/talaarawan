@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.aaron.talaarawan.databinding.FragmentEntryListBinding
 
 /**
@@ -25,11 +26,23 @@ class EntryListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentEntryListBinding.inflate(inflater, container, false)
+
+        // set click listener on the fab
+        binding.addBtn.setOnClickListener { addEntry() }
+
         return binding.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    /**
+     * Navigates to the screen for adding a new journal entry.
+     */
+    private fun addEntry() {
+        val action = EntryListFragmentDirections.actionEntryListFragmentToEditFragment()
+        findNavController().navigate(action)
     }
 }

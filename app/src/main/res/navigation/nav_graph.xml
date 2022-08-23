@@ -30,7 +30,11 @@
         android:id="@+id/entryListFragment"
         android:name="com.aaron.talaarawan.ui.EntryListFragment"
         android:label="EntryListFragment"
-        tools:layout="@layout/fragment_entry_list"/>
+        tools:layout="@layout/fragment_entry_list">
+        <action
+            android:id="@+id/action_entryListFragment_to_editFragment"
+            app:destination="@id/editFragment" />
+    </fragment>
     <fragment
         android:id="@+id/editFragment"
         android:name="com.aaron.talaarawan.ui.EditFragment"
