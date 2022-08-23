@@ -21,8 +21,13 @@
         android:label="EntryListFragment"
         tools:layout="@layout/fragment_entry_list"/>
     <fragment
-        android:id="@+id/detailFragment"
+        android:id="@+id/editFragment"
         android:name="com.aaron.talaarawan.ui.EditFragment"
+        android:label="editFragment"
+        tools:layout="@layout/fragment_edit" />
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.aaron.talaarawan.ui.DetailFragment"
         android:label="DetailFragment"
-        tools:layout="@layout/fragment_edit"/>
+        tools:layout="@layout/fragment_detail"/>
 </navigation>
