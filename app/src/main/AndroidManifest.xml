@@ -4,6 +4,7 @@
     package="com.aaron.talaarawan">
 
     <application
+        android:name=".ui.JournalApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
