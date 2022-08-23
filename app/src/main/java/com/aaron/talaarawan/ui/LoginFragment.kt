@@ -12,19 +12,17 @@ import com.aaron.talaarawan.JournalViewModelFactory
 import com.aaron.talaarawan.data.Entry
 import com.aaron.talaarawan.data.User
 import com.aaron.talaarawan.databinding.FragmentLoginBinding
+import com.aaron.talaarawan.viewmodels.LoginViewModel
+import com.aaron.talaarawan.viewmodels.LoginViewModelFactory
 
 /**
  * The login screen of the application.
  */
 class LoginFragment : Fragment() {
 
-    private lateinit var userList: List<User>   // Note: Currently only one user is supported
-
-    private val viewModel: JournalViewModel by activityViewModels {
-        val application = activity?.application as JournalApplication
-        JournalViewModelFactory(
-            application.database.userDao(),
-            application.database.entryDao()
+    private val viewModel: LoginViewModel by activityViewModels {
+        LoginViewModelFactory(
+            (activity?.application as JournalApplication).database.userDao()
         )
     }
 
@@ -47,11 +45,19 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.allUsers.observe(viewLifecycleOwner) {
-            userList = it
-            if (userList.isEmpty()) {
+            if (it.isEmpty()) {
+                // not registered yet
                 val action =
                     LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
                 findNavController().navigate(action)
+            } else {
+                // hide the loading indicator and show login field
+                binding.apply {
+                    progressBar.visibility = View.GONE
+                    username.visibility = View.VISIBLE
+                    pinInputLayout.visibility = View.VISIBLE
+                    loginBtn.visibility = View.VISIBLE
+                }
             }
         }
     }
