@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.aaron.talaarawan.R
 import com.aaron.talaarawan.databinding.FragmentLoginBinding
@@ -44,6 +45,8 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
+
+        binding.loginBtn.setOnClickListener { login() }
         return binding.root
     }
 
@@ -78,6 +81,22 @@ class LoginFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    /**
+     * Attempts to login to the application with the given pin
+     */
+    private fun login() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val users = viewModel.getUsers()
+            if (users.first().userPin == binding.pinInputEditText.text.toString()) {
+                // go to list of entries if pin is correct
+                val action = LoginFragmentDirections.actionLoginFragmentToEntryListFragment()
+                findNavController().navigate(action)
+            } else {
+                binding.pinInputLayout.error = getString(R.string.incorrect_pin)
+            }
+        }
     }
 
 
