@@ -14,37 +14,6 @@ class JournalViewModel(
     private val entryDao: EntryDao
 ) : ViewModel() {
 
-    /**
-     * Function to save a user to the database
-     */
-    fun addUser(username: String = "",fullName: String, pin: String) {
-        val newUser = createUser(username,fullName,pin)
-        insertUser(newUser)
-    }
-
-    /**
-     * Interacts with the [UserDao] to insert a user to the database
-     */
-    private fun insertUser(user: User) {
-        viewModelScope.launch {
-            userDao.insert(user)
-        }
-    }
-
-    /**
-     * Creates an instance of a [User]
-     */
-    private fun createUser(
-        username: String,
-        fullName: String,
-        pin: String
-    ): User {
-        return User(
-            username = username,
-            userFullName = fullName,
-            userPin = pin
-        )
-    }
 }
 
 
