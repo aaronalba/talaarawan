@@ -67,13 +67,9 @@ class LoginFragment : Fragment() {
                     pinInputLayout.visibility = View.VISIBLE
                     loginBtn.visibility = View.VISIBLE
 
-                    // show and set the username text view
-                    val name: String = list[0].userFullName.split(" ").first()
-                    username.visibility = View.VISIBLE
-                    username.text = name
-
                     // greet user
-                    header.text = getString(R.string.welcome_back)
+                    val name: String = list[0].userFullName.split(" ").first()
+                    header.text = getString(R.string.hello, name)
                 }
             }
         }
