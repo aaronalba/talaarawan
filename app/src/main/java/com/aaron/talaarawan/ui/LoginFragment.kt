@@ -5,12 +5,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.aaron.talaarawan.JournalViewModel
+import com.aaron.talaarawan.JournalViewModelFactory
+import com.aaron.talaarawan.data.Entry
+import com.aaron.talaarawan.data.User
 import com.aaron.talaarawan.databinding.FragmentLoginBinding
 
 /**
  * The login screen of the application.
  */
 class LoginFragment : Fragment() {
+
+    private lateinit var userList: List<User>   // Note: Currently only one user is supported
+
+    private val viewModel: JournalViewModel by activityViewModels {
+        val application = activity?.application as JournalApplication
+        JournalViewModelFactory(
+            application.database.userDao(),
+            application.database.entryDao()
+        )
+    }
 
     /**
      * View binding property to access the views and is valid only
@@ -26,6 +42,18 @@ class LoginFragment : Fragment() {
     ): View? {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.allUsers.observe(viewLifecycleOwner) {
+            userList = it
+            if (userList.isEmpty()) {
+                val action =
+                    LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
+                findNavController().navigate(action)
+            }
+        }
     }
 
     override fun onDestroyView() {
