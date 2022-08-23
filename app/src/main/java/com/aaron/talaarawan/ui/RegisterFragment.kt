@@ -14,6 +14,7 @@ import com.aaron.talaarawan.R
 import com.aaron.talaarawan.viewmodels.RegisterViewModel
 import com.aaron.talaarawan.viewmodels.RegisterViewModelFactory
 import com.aaron.talaarawan.databinding.FragmentRegisterBinding
+import com.aaron.talaarawan.util.clearErrorAfterTypeWatcher
 import com.google.android.material.textfield.TextInputLayout
 
 /**
@@ -103,19 +104,4 @@ class RegisterFragment : Fragment() {
             requireActivity().finish()
         }
     }
-
-    /**
-     * Clears the error of an EditText when the user starts typing on the field.
-     * @return The TextWatcher that will clear errors on the field
-     */
-    private fun clearErrorAfterTypeWatcher(
-        layout: TextInputLayout,
-    ): TextWatcher =
-        object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-            override fun afterTextChanged(p0: Editable?) {
-                layout.error = null
-            }
-        }
 }

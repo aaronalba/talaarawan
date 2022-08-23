@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -12,6 +13,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.aaron.talaarawan.R
 import com.aaron.talaarawan.databinding.FragmentLoginBinding
+import com.aaron.talaarawan.util.clearErrorAfterTypeWatcher
 import com.aaron.talaarawan.viewmodels.LoginViewModel
 import com.aaron.talaarawan.viewmodels.LoginViewModelFactory
 import kotlinx.coroutines.launch
@@ -52,6 +54,11 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // create watcher that will remove any errors in the pin field when the user starts typing
+        binding.pinInputEditText.addTextChangedListener(
+            clearErrorAfterTypeWatcher(binding.pinInputLayout)
+        )
 
         // asynchronously load the list of users
         viewLifecycleOwner.lifecycleScope.launch {
