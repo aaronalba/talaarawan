@@ -18,4 +18,7 @@ data class Entry(
 
     @ColumnInfo(name = "body")
     val entryBody: String,
+
+    @ColumnInfo(name = "date")
+    val date: Long
 )
