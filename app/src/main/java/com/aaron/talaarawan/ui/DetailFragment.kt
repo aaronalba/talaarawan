@@ -55,6 +55,8 @@ class DetailFragment : Fragment() {
             binding.detailDay.text = entry.getDayOfWeek()
             binding.detailTitle.text = entry.entryTitle
             binding.detailBody.text = entry.entryBody
+            binding.titleInputEdit.setText(entry.entryTitle)
+            binding.bodyInputEdit.setText(entry.entryBody)
         }
 
         // dynamically change the UI based on the editing mode
@@ -71,22 +73,6 @@ class DetailFragment : Fragment() {
                 binding.detailBodyHolder.visibility = View.VISIBLE
             }
         }
-
-        // update the entry object when the user enters text in the TextInputs
-        binding.titleInputEdit.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                viewModel.updateEntryTitle(p0.toString())
-            }
-            override fun afterTextChanged(p0: Editable?) { }
-        })
-        binding.bodyInputEdit.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                viewModel.updateEntryBody(p0.toString())
-            }
-            override fun afterTextChanged(p0: Editable?) { }
-        })
 
         // initialize the menu
         initializeMenu()
@@ -135,7 +121,12 @@ class DetailFragment : Fragment() {
                         // Save the entry and close editing mode.
                         showSnackbar(getString(R.string.entry_saved))
                         viewModel.setEditing(false)
-                        viewModel.insertEntry()
+
+                        // save the newly edited entry to the database
+                        viewModel.saveEntry(
+                            binding.titleInputEdit.text.toString(),
+                            binding.bodyInputEdit.text.toString()
+                        )
                     }
                     R.id.action_delete -> {
 

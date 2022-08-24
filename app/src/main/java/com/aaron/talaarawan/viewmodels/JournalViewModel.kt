@@ -9,7 +9,7 @@ import java.util.*
 import kotlin.IllegalStateException
 
 /**
- * The ViewModel for the application
+ * The shared ViewModel between [EntryListFragment] and [DetailFragment].
  */
 class JournalViewModel(
     private val userDao: UserDao,
@@ -19,6 +19,7 @@ class JournalViewModel(
     // list of entries property
     val entryList: LiveData<List<Entry>> = entryDao.getEntries().asLiveData()
 
+    // ---------------------------
     // edit mode property
     private val _isEditing = MutableLiveData(true)
     val isEditing: LiveData<Boolean> = _isEditing
@@ -30,6 +31,7 @@ class JournalViewModel(
         _isEditing.value = value
     }
 
+    // ---------------------------
     // the selected entry property
     private val _entry = MutableLiveData<Entry>()
     val entry: LiveData<Entry> = _entry
@@ -42,6 +44,20 @@ class JournalViewModel(
     }
 
     /**
+     * Update the selected entry property with a new title and body values.
+     */
+    private fun updateSelectedEntry(title: String, body: String) {
+        entry.value?.let {
+            val newEntry = it.copy(
+                entryTitle = title,
+                entryBody = body
+            )
+            _entry.value = newEntry
+        }
+    }
+
+    // ----- instance creation functions -------
+    /**
      * Creates a new entry instance and assigns it as the current selected entry.
      */
     fun createNewEntry() {
@@ -49,30 +65,46 @@ class JournalViewModel(
         _entry.value = newEntry
     }
 
+    // ----- database functions ------
     /**
-     * Updates the title of the selected entry.
+     * Function for saving the newly edited entry to the database
      */
-    fun updateEntryTitle(title: String) {
-        val newEntry: Entry = _entry.value?.copy(entryTitle = title)
-            ?: throw IllegalStateException("Selected entry is null")
-        _entry.value = newEntry
-    }
+    fun saveEntry(title: String, body: String) {
+        // update the title and body values of the selected entry
+        updateSelectedEntry(title, body)
 
-    /**
-     * Updates the body of the selected entry.
-     */
-    fun updateEntryBody(body: String) {
-        val newEntry: Entry = _entry.value?.copy(entryBody = body)
-            ?: throw IllegalStateException("Selected entry is null")
-        _entry.value = newEntry
+        // determine if the entry is not yet in the database
+        entryList.value?.let { list ->
+            list.forEach { e ->
+                if (e.id == entry.value?.id) {
+                    // use database update if the entry is not yet saved prior
+                    updateEntry()
+                    return
+                }
+            }
+        }
+        // use database insert if it is a newly created entry
+        insertEntry()
     }
 
     /**
      * Interacts with the [EntryDao] to insert the selected entry into the database
      */
-    fun insertEntry() {
+    private fun insertEntry() {
         viewModelScope.launch {
             entryDao.insert(
+                _entry.value
+                    ?: throw IllegalStateException("Cannot insert to database. Selected entry is null")
+            )
+        }
+    }
+
+    /**
+     * Interacts with the [EntryDao] to update the selected entry into the database
+     */
+    private fun updateEntry() {
+        viewModelScope.launch {
+            entryDao.update(
                 _entry.value
                     ?: throw IllegalStateException("Cannot insert to database. Selected entry is null")
             )
