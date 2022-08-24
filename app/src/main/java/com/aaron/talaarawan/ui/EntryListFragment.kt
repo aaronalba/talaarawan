@@ -56,8 +56,14 @@ class EntryListFragment : Fragment() {
         removeTitle(requireActivity())
 
         // initialize the recycler view
-        val adapter = EntryAdapter {
+        val adapter = EntryAdapter { entry ->
+            // update selected fragment
+            viewModel.updateSelectedEntry(entry)
+            viewModel.setEditing(false)
 
+            // navigate to detail fragment
+            val action = EntryListFragmentDirections.actionEntryListFragmentToDetailFragment()
+            findNavController().navigate(action)
         }
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this.context)

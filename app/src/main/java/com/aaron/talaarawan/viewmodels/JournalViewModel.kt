@@ -35,6 +35,13 @@ class JournalViewModel(
     val entry: LiveData<Entry> = _entry
 
     /**
+     * Update the selected entry property with another entry.
+     */
+    fun updateSelectedEntry(entry: Entry) {
+        _entry.value = entry
+    }
+
+    /**
      * Creates a new entry instance and assigns it as the current selected entry.
      */
     fun createNewEntry() {
