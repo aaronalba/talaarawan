@@ -20,4 +20,6 @@
     <string name="done">Done</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
+    <string name="edit_mode">Edit mode</string>
+    <string name="entry_saved">Entry saved</string>
 </resources>

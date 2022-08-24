@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.aaron.talaarawan.databinding.FragmentEntryListBinding
+import com.aaron.talaarawan.util.hideAppbar
+import com.aaron.talaarawan.util.removeTitle
 import com.aaron.talaarawan.viewmodels.JournalViewModel
 import com.aaron.talaarawan.viewmodels.JournalViewModelFactory
 
@@ -44,6 +46,12 @@ class EntryListFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        hideAppbar(requireActivity())
+        removeTitle(requireActivity())
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -53,8 +61,9 @@ class EntryListFragment : Fragment() {
      * Navigates to the screen for adding a new journal entry.
      */
     private fun addEntry() {
-        val action = EntryListFragmentDirections.actionEntryListFragmentToEditFragment()
+        val action = EntryListFragmentDirections.actionEntryListFragmentToDetailFragment()
         findNavController().navigate(action)
         viewModel.createNewEntry()
+        viewModel.setEditing(true)
     }
 }

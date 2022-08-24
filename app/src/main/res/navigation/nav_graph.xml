@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/detailFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -32,7 +32,7 @@
         android:label="EntryListFragment"
         tools:layout="@layout/fragment_entry_list">
         <action
-            android:id="@+id/action_entryListFragment_to_editFragment"
+            android:id="@+id/action_entryListFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
     </fragment>
     <fragment

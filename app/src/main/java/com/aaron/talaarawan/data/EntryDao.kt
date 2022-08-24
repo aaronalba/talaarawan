@@ -12,11 +12,11 @@ interface EntryDao {
     fun getEntry(id: Int): Flow<Entry>
 
     @Insert
-    fun insert(entry: Entry)
+    suspend fun insert(entry: Entry)
 
     @Update
-    fun update(entry: Entry)
+    suspend fun update(entry: Entry)
 
     @Delete
-    fun delete(entry: Entry)
+    suspend fun delete(entry: Entry)
 }

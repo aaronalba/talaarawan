@@ -46,7 +46,6 @@ class JournalViewModel(
         _entry.value = newEntry
     }
 
-
     /**
      * Updates the body of the selected entry.
      */
@@ -55,7 +54,6 @@ class JournalViewModel(
             ?: throw IllegalStateException("Selected entry is null")
         _entry.value = newEntry
     }
-
 
     /**
      * Interacts with the [EntryDao] to insert the selected entry into the database
