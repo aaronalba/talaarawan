@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.aaron.talaarawan.adapter.EntryAdapter
 import com.aaron.talaarawan.databinding.FragmentEntryListBinding
 import com.aaron.talaarawan.util.hideAppbar
 import com.aaron.talaarawan.util.removeTitle
@@ -48,8 +50,39 @@ class EntryListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // configure the app bar
         hideAppbar(requireActivity())
         removeTitle(requireActivity())
+
+        // initialize the recycler view
+        val adapter = EntryAdapter {
+
+        }
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
+
+        // observe the list of entries from the database and update the list accordingly
+        viewModel.entryList.observe(viewLifecycleOwner) { entryList ->
+            entryList?.let {
+                if (it.isNotEmpty()) {
+                    // show recycler view if the list is not empty
+                    binding.recyclerView.visibility = View.VISIBLE
+                    binding.entries.visibility = View.VISIBLE
+                    binding.addNote.visibility = View.GONE
+                    binding.addNoteLabel.visibility = View.GONE
+                } else {
+                    // show empty list image
+                    binding.recyclerView.visibility = View.GONE
+                    binding.entries.visibility = View.GONE
+                    binding.addNote.visibility = View.VISIBLE
+                    binding.addNoteLabel.visibility = View.VISIBLE
+                }
+
+                // update adapter with the newly received list
+                adapter.submitList(it)
+            }
+        }
     }
 
     override fun onDestroyView() {
