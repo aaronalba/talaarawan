@@ -22,4 +22,8 @@
     <string name="edit">Edit</string>
     <string name="edit_mode">Edit mode</string>
     <string name="entry_saved">Entry saved</string>
+    <string name="delete_entry">Delete entry?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="entry_has_been_deleted">Entry %1$s has been deleted!</string>
 </resources>

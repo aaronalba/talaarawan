@@ -18,6 +18,7 @@ import com.aaron.talaarawan.util.removeTitle
 import com.aaron.talaarawan.util.showAppbar
 import com.aaron.talaarawan.viewmodels.JournalViewModel
 import com.aaron.talaarawan.viewmodels.JournalViewModelFactory
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
@@ -131,19 +132,14 @@ class DetailFragment : Fragment() {
                         )
                     }
                     R.id.action_delete -> {
-                        // delete the entry from the database
-                        lifecycleScope.launch {
-                            viewModel.deleteEntry()
-
-                            showSnackbar(
-                                "Entry ${viewModel.entry.value?.entryTitle} deleted!",
-                                Snackbar.LENGTH_SHORT
-                            )
-
-                            // navigate back to the list
-                            viewModel.setEditing(false)
-                            findNavController().navigateUp()
-                        }
+                        MaterialAlertDialogBuilder(requireContext())
+                            .setTitle(getString(R.string.delete_entry))
+                            .setCancelable(false)
+                            .setNegativeButton(getString(R.string.no)) { _, _ -> }
+                            .setPositiveButton(getString(R.string.delete)) { _, _ ->
+                                deleteEntry()
+                            }
+                            .show()
                     }
                     R.id.action_edit -> {
                         showSnackbar(getString(R.string.edit_mode))
@@ -155,5 +151,27 @@ class DetailFragment : Fragment() {
             }
         }
         requireActivity().addMenuProvider(menuProvider, viewLifecycleOwner)
+    }
+
+    /**
+     * Deletes the current selected entry
+     */
+    private fun deleteEntry() {
+        lifecycleScope.launch {
+            viewModel.deleteEntry()
+
+            // notify the user that the entry has been deleted
+            showSnackbar(
+                getString(
+                    R.string.entry_has_been_deleted,
+                    viewModel.entry.value?.entryTitle
+                ),
+                Snackbar.LENGTH_SHORT
+            )
+
+            // navigate back to the list
+            viewModel.setEditing(false)
+            findNavController().navigateUp()
+        }
     }
 }
