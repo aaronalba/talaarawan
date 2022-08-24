@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.aaron.talaarawan.data.Entry
 import com.aaron.talaarawan.data.EntryDao
 import com.aaron.talaarawan.data.UserDao
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.IllegalStateException
@@ -19,7 +20,6 @@ class JournalViewModel(
     // list of entries property
     val entryList: LiveData<List<Entry>> = entryDao.getEntries().asLiveData()
 
-    // ---------------------------
     // edit mode property
     private val _isEditing = MutableLiveData(true)
     val isEditing: LiveData<Boolean> = _isEditing
@@ -31,7 +31,6 @@ class JournalViewModel(
         _isEditing.value = value
     }
 
-    // ---------------------------
     // the selected entry property
     private val _entry = MutableLiveData<Entry>()
     val entry: LiveData<Entry> = _entry
@@ -56,7 +55,6 @@ class JournalViewModel(
         }
     }
 
-    // ----- instance creation functions -------
     /**
      * Creates a new entry instance and assigns it as the current selected entry.
      */
@@ -65,7 +63,6 @@ class JournalViewModel(
         _entry.value = newEntry
     }
 
-    // ----- database functions ------
     /**
      * Function for saving the newly edited entry to the database
      */
@@ -73,30 +70,33 @@ class JournalViewModel(
         // update the title and body values of the selected entry
         updateSelectedEntry(title, body)
 
-        // determine if the entry is not yet in the database
-        entryList.value?.let { list ->
-            list.forEach { e ->
-                if (e.id == entry.value?.id) {
-                    // use database update if the entry is not yet saved prior
+        viewModelScope.launch {
+            entry.value?.let {
+                // determine if the entry is not yet in the database
+                if (it.id != 0) {
+                    // existing entry, update the database
                     updateEntry()
-                    return
+
+                } else {
+                    // new entry, insert into the database
+                    val newId = insertEntry()
+
+                    // update the id of the selected entry
+                    val newEntry = _entry.value!!.copy(id = newId.toInt())
+                    _entry.value = newEntry
                 }
             }
         }
-        // use database insert if it is a newly created entry
-        insertEntry()
     }
 
     /**
      * Interacts with the [EntryDao] to insert the selected entry into the database
      */
-    private fun insertEntry() {
-        viewModelScope.launch {
-            entryDao.insert(
-                _entry.value
-                    ?: throw IllegalStateException("Cannot insert to database. Selected entry is null")
-            )
-        }
+    private suspend fun insertEntry(): Long {
+        return entryDao.insert(
+            _entry.value
+                ?: throw IllegalStateException("Cannot insert to database. Selected entry is null")
+        )
     }
 
     /**
@@ -105,6 +105,18 @@ class JournalViewModel(
     private fun updateEntry() {
         viewModelScope.launch {
             entryDao.update(
+                _entry.value
+                    ?: throw IllegalStateException("Cannot insert to database. Selected entry is null")
+            )
+        }
+    }
+
+    /**
+     * Interacts with [EntryDao] to delete the selected entry from the database
+     */
+    suspend fun deleteEntry() {
+        viewModelScope.launch {
+            entryDao.delete(
                 _entry.value
                     ?: throw IllegalStateException("Cannot insert to database. Selected entry is null")
             )

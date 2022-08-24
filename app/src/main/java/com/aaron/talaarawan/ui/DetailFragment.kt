@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.aaron.talaarawan.R
 import com.aaron.talaarawan.data.getDayOfWeek
 import com.aaron.talaarawan.data.getFormattedDate
@@ -17,6 +19,7 @@ import com.aaron.talaarawan.util.showAppbar
 import com.aaron.talaarawan.viewmodels.JournalViewModel
 import com.aaron.talaarawan.viewmodels.JournalViewModelFactory
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.launch
 
 /**
  * The screen for updating the values of an entry.
@@ -90,8 +93,7 @@ class DetailFragment : Fragment() {
     /**
      * Shows a snackbar with the given message. Use it only when the view is inflated.
      */
-    private fun showSnackbar(message: String) {
-        val duration = 1000 // 1 second
+    private fun showSnackbar(message: String, duration: Int = 1000) {
         Snackbar.make(binding.root, message, duration).show()
     }
 
@@ -129,7 +131,19 @@ class DetailFragment : Fragment() {
                         )
                     }
                     R.id.action_delete -> {
+                        // delete the entry from the database
+                        lifecycleScope.launch {
+                            viewModel.deleteEntry()
 
+                            showSnackbar(
+                                "Entry ${viewModel.entry.value?.entryTitle} deleted!",
+                                Snackbar.LENGTH_SHORT
+                            )
+
+                            // navigate back to the list
+                            viewModel.setEditing(false)
+                            findNavController().navigateUp()
+                        }
                     }
                     R.id.action_edit -> {
                         showSnackbar(getString(R.string.edit_mode))

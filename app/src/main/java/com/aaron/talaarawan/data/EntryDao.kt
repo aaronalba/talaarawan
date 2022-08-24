@@ -12,7 +12,7 @@ interface EntryDao {
     fun getEntry(id: Int): Flow<Entry>
 
     @Insert
-    suspend fun insert(entry: Entry)
+    suspend fun insert(entry: Entry): Long
 
     @Update
     suspend fun update(entry: Entry)
