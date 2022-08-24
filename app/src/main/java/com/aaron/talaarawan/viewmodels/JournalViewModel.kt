@@ -16,6 +16,15 @@ class JournalViewModel(
     private val entryDao: EntryDao
 ) : ViewModel() {
 
+    // property that keeps track if the app is in edit mode
+    private val _isEditing = MutableLiveData(true)
+    val isEditing: LiveData<Boolean> = _isEditing
+
+    // updates the value of the isEditing property
+    fun setEditing(value: Boolean) {
+        _isEditing.value = value
+    }
+
     // the selected entry
     private val _entry = MutableLiveData<Entry>()
     val entry: LiveData<Entry> = _entry
@@ -24,11 +33,7 @@ class JournalViewModel(
      * Creates a new entry instance and assigns it as the current selected entry.
      */
     fun createNewEntry() {
-        val newEntry = Entry(
-            entryTitle = "",
-            entryBody = "",
-            entryDate = Date().time
-        )
+        val newEntry = Entry(entryTitle = "", entryBody = "", entryDate = Date().time)
         _entry.value = newEntry
     }
 

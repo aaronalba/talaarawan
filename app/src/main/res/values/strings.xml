@@ -17,4 +17,7 @@
     <string name="please_enter_your_name">Please enter your name</string>
     <string name="pins_do_not_match">Pins don\'t match</string>
     <string name="incorrect_pin">Incorrect pin</string>
+    <string name="done">Done</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
 </resources>
