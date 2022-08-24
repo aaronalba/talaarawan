@@ -5,13 +5,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.aaron.talaarawan.databinding.FragmentEntryListBinding
+import com.aaron.talaarawan.viewmodels.JournalViewModel
+import com.aaron.talaarawan.viewmodels.JournalViewModelFactory
 
 /**
  * The screen that shows a list of saved journal entries.
  */
 class EntryListFragment : Fragment() {
+
+    private val viewModel: JournalViewModel by activityViewModels {
+        val application = requireActivity().application as JournalApplication
+        JournalViewModelFactory(
+            application.database.userDao(),
+            application.database.entryDao()
+        )
+    }
 
     /**
      * View binding property used to access the views and is valid only
@@ -44,5 +55,6 @@ class EntryListFragment : Fragment() {
     private fun addEntry() {
         val action = EntryListFragmentDirections.actionEntryListFragmentToEditFragment()
         findNavController().navigate(action)
+        viewModel.createNewEntry()
     }
 }
