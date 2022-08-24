@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.Talaarawan" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryVariant">@color/orange_dark</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -12,5 +12,32 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="materialButtonStyle">@style/AppTheme.Button</item>
+        <item name="floatingActionButtonStyle">@style/AppTheme.FAB</item>
+        <item name="actionBarTheme">@style/AppTheme.ActionBar</item>
+    </style>
+
+    <style name="AppTheme.ActionBar" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/white</item>
+        <item name="titleTextColor">@color/white</item>
+        <item name="subtitleTextColor">@color/white</item>
+    </style>
+
+
+    <style name="AppTheme.Button" parent="Widget.MaterialComponents.Button">
+        <item name="cornerRadius">30dp</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AppTheme.Header" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/orange</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="AppTheme.FAB" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">@color/orange</item>
+        <item name="tint">@color/white</item>
     </style>
 </resources>

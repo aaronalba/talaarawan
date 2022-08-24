@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/Talaarawan/app/src/main/res/drawable/ic_diary.xml" value="0.199" />
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/Talaarawan/app/src/main/res/drawable/selector.xml" value="0.1165" />
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/Talaarawan/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/Talaarawan/app/src/main/res/layout/fragment_detail.xml" value="0.25" />
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/Talaarawan/app/src/main/res/layout/fragment_edit.xml" value="0.1" />
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/Talaarawan/app/src/main/res/layout/fragment_entry_list.xml" value="0.203125" />
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/Talaarawan/app/src/main/res/layout/fragment_login.xml" value="0.22" />
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/Talaarawan/app/src/main/res/layout/fragment_register.xml" value="0.22" />
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/Talaarawan/app/src/main/res/layout/fragment_signup.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/Talaarawan/app/src/main/res/layout/list_item_entry.xml" value="0.18" />
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/Talaarawan/app/src/main/res/menu/menu_detail.xml" value="0.203125" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
