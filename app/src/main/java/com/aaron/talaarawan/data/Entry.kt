@@ -37,3 +37,8 @@ fun Entry.getFormattedDate(): String {
 fun Entry.getDayOfWeek(): String {
     return SimpleDateFormat("EEEE").format(Date(entryDate))
 }
+
+@SuppressLint("SimpleDateFormat")
+fun Entry.getShortDate(): String {
+    return SimpleDateFormat("dd MMMM").format(Date(entryDate))
+}

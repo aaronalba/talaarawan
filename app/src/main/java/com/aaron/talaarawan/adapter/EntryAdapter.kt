@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aaron.talaarawan.data.Entry
 import com.aaron.talaarawan.data.getFormattedDate
+import com.aaron.talaarawan.data.getShortDate
 import com.aaron.talaarawan.databinding.ListItemEntryBinding
 
 /**
@@ -23,7 +24,7 @@ class EntryAdapter(
         : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(entry: Entry) {
-            binding.itemDate.text = entry.getFormattedDate()
+            binding.itemDate.text = entry.getShortDate()
             binding.itemTitle.text = entry.entryTitle
         }
     }
