@@ -145,6 +145,9 @@ class DetailFragment : Fragment() {
                         showSnackbar(getString(R.string.edit_mode))
                         viewModel.setEditing(true)
                     }
+                    else -> {
+                        return false
+                    }
                 }
                 requireActivity().invalidateMenu()  // update the menu items
                 return true
