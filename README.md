@@ -10,10 +10,10 @@ Download the apk file in the demo directory named `app.apk` and install it on yo
 * Uses the AndroidX Room library to manage the local database that stores the entries.
 
 ## Demo
-![demo-photo-1](https://github.com/aaronalba/talaarawan/blob/master/demo/demo1.jpg)
-![demo-photo-2](https://github.com/aaronalba/talaarawan/blob/master/demo/demo2.jpg)
-![demo-photo-3](https://github.com/aaronalba/talaarawan/blob/master/demo/demo3.jpg)
-![demo-photo-4](https://github.com/aaronalba/talaarawan/blob/master/demo/demo4.jpg)
-![demo-photo-5](https://github.com/aaronalba/talaarawan/blob/master/demo/demo5.jpg)
-![demo-photo-6](https://github.com/aaronalba/talaarawan/blob/master/demo/demo6.jpg)
-![demo-photo-7](https://github.com/aaronalba/talaarawan/blob/master/demo/demo7.jpg)
+![demo-photo-1](https://github.com/aaronalba/talaarawan/blob/main/demo/demo1.png)
+![demo-photo-2](https://github.com/aaronalba/talaarawan/blob/main/demo/demo2.png)
+![demo-photo-3](https://github.com/aaronalba/talaarawan/blob/main/demo/demo3.png)
+![demo-photo-4](https://github.com/aaronalba/talaarawan/blob/main/demo/demo4.png)
+![demo-photo-5](https://github.com/aaronalba/talaarawan/blob/main/demo/demo5.png)
+![demo-photo-6](https://github.com/aaronalba/talaarawan/blob/main/demo/demo6.png)
+![demo-photo-7](https://github.com/aaronalba/talaarawan/blob/main/demo/demo7.png)
