@@ -1,10 +1,13 @@
 package com.aaron.talaarawan.ui
 
+import android.app.Activity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.getSystemService
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -121,6 +124,8 @@ class DetailFragment : Fragment() {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 when(menuItem.itemId) {
                     R.id.action_done -> {
+                        hideKeyboard()
+
                         // Save the entry and close editing mode.
                         showSnackbar(getString(R.string.entry_saved))
                         viewModel.setEditing(false)
@@ -144,6 +149,9 @@ class DetailFragment : Fragment() {
                     R.id.action_edit -> {
                         showSnackbar(getString(R.string.edit_mode))
                         viewModel.setEditing(true)
+                    }
+                    else -> {
+                        return false
                     }
                 }
                 requireActivity().invalidateMenu()  // update the menu items
@@ -173,5 +181,15 @@ class DetailFragment : Fragment() {
             viewModel.setEditing(false)
             findNavController().navigateUp()
         }
+    }
+
+
+    /**
+     * Hides the on-screen keyboard.
+     */
+    private fun hideKeyboard() {
+        val inputMethodManager =
+            requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(activity?.currentFocus?.windowToken, 0)
     }
 }

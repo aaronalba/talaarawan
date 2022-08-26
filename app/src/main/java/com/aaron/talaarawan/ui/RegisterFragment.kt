@@ -37,7 +37,7 @@ class RegisterFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        configureBackPressCallback()
+//        configureBackPressCallback()
     }
 
     override fun onCreateView(
@@ -95,13 +95,13 @@ class RegisterFragment : Fragment() {
         }
     }
 
-    /**
-     * Adds a custom back press callback on the activity.
-     */
-    private fun configureBackPressCallback() {
-        requireActivity().onBackPressedDispatcher.addCallback(this, true) {
-            // close the app when the back button is pressed
-            requireActivity().finish()
-        }
-    }
+//    /**
+//     * Adds a custom back press callback on the activity.
+//     */
+//    private fun configureBackPressCallback() {
+//        requireActivity().onBackPressedDispatcher.addCallback(this, true) {
+//            // close the app when the back button is pressed
+//            requireActivity().finish()
+//        }
+//    }
 }
